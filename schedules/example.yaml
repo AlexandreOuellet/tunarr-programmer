@@ -1,0 +1,24 @@
+# DRAFT format: this is what a channel file is meant to look like. Nothing reads it yet.
+channel: the-funny-bone          # matches the channel in Tunarr
+grid: 15m                        # every program starts on a multiple of this, exactly
+ads:
+  list: Old Ads                  # the filler list the ad clips come from
+  step: 15s                      # planned lengths are multiples of this
+  ratio: { min: 15%, max: 60% }  # ads as a share of the show, inside its block
+  mid:  { every: 8m, length: 2m-3m, tailBuffer: 1m }
+  post: { length: 0-5m }
+  tail: { length: 0-25m }
+  head: { length: 0 }
+  pre:  { length: 0 }
+  fallback: true                 # one clip stretched over a gap the ads cannot fill
+
+pools:
+  office-hours:
+    shows: [The Office, Parks and Recreation, 30 Rock]
+  comedy-movies-up-to-117:
+    movies: { genre: Comedy, duration: "<=117m" }
+
+week:                            # day 0 is Sunday
+  sun:
+    - { at: "00:00", pool: office-hours }
+    - { at: "13:00", pool: comedy-movies-up-to-117 }
